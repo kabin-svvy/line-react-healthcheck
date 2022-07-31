@@ -2,6 +2,18 @@ import React from "react";
 import "./UploadFile.css"
 
 class UploadFile extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.refInputFile = React.createRef();
+        this.onUploadFileClick = this.onUploadFileClick.bind(this);
+    }
+    
+
+    onUploadFileClick(event) {
+        this.refInputFile.current.click();
+    }
+
     render() {
         return (
             <div className="upload-backgroud">
@@ -12,14 +24,15 @@ class UploadFile extends React.Component {
                 </div>
                 <div className="upload-lable2">
                     <div>
-                        <image className="upload-icon"></image>
+                        <div className="upload-icon"></div>
                         <div className="upload-text1">
                             <p>Drag your .csv file here to start uploading.</p>
                         </div>
                         <div className="upload-text2">
                             <p>----- OR -----</p>
                         </div>
-                        <button className="upload-button">Browse File</button>
+                        <input className="upload-input" type="file" ref={this.refInputFile} onChange={this.onUploadFileChange} /> 
+                        <input className="upload-button" type="button" onClick={this.onUploadFileClick} value="Browse File" />
                     </div>
                 </div>
             </div>

@@ -110,3 +110,7 @@
 
     color: #95A1BB;
 }
+
+.upload-input {
+    display: none;
+}
