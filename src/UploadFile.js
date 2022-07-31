@@ -2,13 +2,21 @@ import React from "react";
 import "./UploadFile.css"
 
 class UploadFile extends React.Component {
-
     constructor(props) {
         super(props);
         this.refInputFile = React.createRef();
         this.onUploadFileClick = this.onUploadFileClick.bind(this);
+        this.state = {
+            uplaodFileSeleted: null
+        }
     }
     
+    onUploadFileChange = (event) => {
+        const file = event.target.files[0]
+        this.setState({
+            uplaodFileSeleted: file 
+        })
+    }
 
     onUploadFileClick(event) {
         this.refInputFile.current.click();
