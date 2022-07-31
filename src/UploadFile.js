@@ -13,11 +13,11 @@ class UploadFile extends React.Component {
         const file = event.target.files[0]
         event.preventDefault()
         const formData = new FormData();
-        formData.append("uplaodFileSeleted", file);
+        formData.append("files", file);
         try {
             const response = axios({
                 method: "post",
-                url: "/api/upload/file",
+                url: "http://localhost:1323/upload",
                 data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
             });
@@ -25,6 +25,7 @@ class UploadFile extends React.Component {
         } catch(error) {
             console.log(error)
         }
+        event.target.value = null
     }
 
     onUploadFileClick(event) {
