@@ -17,7 +17,7 @@ class UploadFile extends React.Component {
         try {
             const response = axios({
                 method: "post",
-                url: "http://localhost:1323/upload",
+                url: "http://localhost:8080/upload",
                 data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
             });
