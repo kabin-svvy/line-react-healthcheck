@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import "./UploadFile.css"
 
 class UploadFile extends React.Component {
@@ -6,16 +7,24 @@ class UploadFile extends React.Component {
         super(props);
         this.refInputFile = React.createRef();
         this.onUploadFileClick = this.onUploadFileClick.bind(this);
-        this.state = {
-            uplaodFileSeleted: null
-        }
     }
-    
+
     onUploadFileChange = (event) => {
         const file = event.target.files[0]
-        this.setState({
-            uplaodFileSeleted: file 
-        })
+        event.preventDefault()
+        const formData = new FormData();
+        formData.append("uplaodFileSeleted", file);
+        try {
+            const response = axios({
+                method: "post",
+                url: "/api/upload/file",
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            console.log(response)
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     onUploadFileClick(event) {
@@ -39,8 +48,10 @@ class UploadFile extends React.Component {
                         <div className="upload-text2">
                             <p>----- OR -----</p>
                         </div>
-                        <input className="upload-input" type="file" ref={this.refInputFile} onChange={this.onUploadFileChange} /> 
-                        <input className="upload-button" type="button" onClick={this.onUploadFileClick} value="Browse File" />
+                        <form onSubmit={this.onUploadFileSubmit}>
+                            <input className="upload-input" type="file" ref={this.refInputFile} onChange={this.onUploadFileChange} /> 
+                            <input className="upload-button" type="button" onClick={this.onUploadFileClick} value="Browse File" />
+                        </form>
                     </div>
                 </div>
             </div>
